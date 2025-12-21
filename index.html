@@ -3,135 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - Пиксельный_снег</title>
+    <title>Тетрадный лист с FAQ</title>
     <style>
+        /* Обнуляем стандартные отступы браузера */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            overflow: hidden;
-            background: white;
-            font-family: Arial, sans-serif;
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            overflow: hidden; /* Ограничиваем прокрутку для чистого вида */
         }
 
-        #canvas {
+        /* Создаем фон страницы */
+        .notebook-container {
+            height: 100vh;
+            width: 100%;
+            background-image: 
+                linear-gradient(#e1e1e1 1px, transparent 1px),
+                linear-gradient(90deg, #e1e1e1 1px, transparent 1px),
+                linear-gradient(90deg, transparent 79px, #ffb2b2 79px, #ffb2b2 80px, transparent 80px);
+            
+            background-size: 30px 30px, 30px 30px, 100% 100%;
+            background-attachment: fixed;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Накладываем легкую текстуру бумаги */
+        .notebook-container::after {
+            content: "";
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+            opacity: 0.3;
+            pointer-events: none;
             z-index: 1;
         }
 
-        .faq-text {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 150px;
-            font-weight: bold;
-            color: white;
+        /* Контейнер для изображения */
+        .image-wrapper {
+            position: relative;
             z-index: 2;
-            mix-blend-mode: difference;
-            user-select: none;
-            letter-spacing: 10px;
+            width: 75vw; /* Занимает 3/4 ширины экрана */
+            height: 75vh; /* Занимает 3/4 высоты экрана */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 80px; /* Учитываем поле слева, чтобы центровка была визуально приятной */
         }
 
-        @media (max-width: 768px) {
-            .faq-text {
-                font-size: 80px;
+        .image-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Сохраняет пропорции изображения */
+            filter: multiply(0.8); /* Можно добавить эффект смешивания с бумагой, если нужно */
+        }
+
+        /* Адаптация под мобильные устройства */
+        @media (max-width: 600px) {
+            .notebook-container {
+                background-size: 20px 20px, 20px 20px, 100% 100%;
+                background-image: 
+                    linear-gradient(#e1e1e1 1px, transparent 1px),
+                    linear-gradient(90deg, #e1e1e1 1px, transparent 1px),
+                    linear-gradient(90deg, transparent 39px, #ffb2b2 39px, #ffb2b2 40px, transparent 40px);
+            }
+            .image-wrapper {
+                width: 85vw; /* На мобильных можно чуть шире */
+                padding-left: 40px;
             }
         }
     </style>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
-    <div class="faq-text">FAQ</div>
 
-    <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
+    <div class="notebook-container">
+        <div class="image-wrapper">
+            <!-- Изображение FAQ.png из той же папки -->
+            <img src="faq.png" alt="FAQ Sketch">
+        </div>
+    </div>
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const pixelSize = 4;
-        const particles = [];
-        const maxParticles = 3000;
-
-        class Particle {
-            constructor() {
-                this.reset();
-                this.y = Math.random() * canvas.height;
-            }
-
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = -pixelSize;
-                this.speed = Math.random() * 2 + 1;
-                this.settled = false;
-            }
-
-            update() {
-                if (!this.settled) {
-                    this.y += this.speed;
-
-                    if (this.y >= canvas.height - pixelSize) {
-                        this.settled = true;
-                        this.y = canvas.height - pixelSize;
-                    } else {
-                        const belowY = Math.floor((this.y + pixelSize) / pixelSize) * pixelSize;
-                        const currentX = Math.floor(this.x / pixelSize) * pixelSize;
-
-                        for (let particle of particles) {
-                            if (particle.settled && particle !== this) {
-                                const particleX = Math.floor(particle.x / pixelSize) * pixelSize;
-                                const particleY = Math.floor(particle.y / pixelSize) * pixelSize;
-
-                                if (particleX === currentX && particleY === belowY) {
-                                    this.settled = true;
-                                    this.y = particleY - pixelSize;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            draw() {
-                ctx.fillStyle = 'black';
-                ctx.fillRect(
-                    Math.floor(this.x / pixelSize) * pixelSize,
-                    Math.floor(this.y / pixelSize) * pixelSize,
-                    pixelSize,
-                    pixelSize
-                );
-            }
-        }
-
-        for (let i = 0; i < maxParticles; i++) {
-            particles.push(new Particle());
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            for (let particle of particles) {
-                particle.update();
-                particle.draw();
-            }
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    </script>
 </body>
 </html>
