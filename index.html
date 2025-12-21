@@ -1,1 +1,137 @@
-И так, что получилось?
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Пиксельный снег</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: white;
+            font-family: Arial, sans-serif;
+        }
+
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .faq-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 150px;
+            font-weight: bold;
+            color: white;
+            z-index: 2;
+            mix-blend-mode: difference;
+            user-select: none;
+            letter-spacing: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .faq-text {
+                font-size: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="faq-text">FAQ</div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const pixelSize = 4;
+        const particles = [];
+        const maxParticles = 3000;
+
+        class Particle {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * canvas.height;
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = -pixelSize;
+                this.speed = Math.random() * 2 + 1;
+                this.settled = false;
+            }
+
+            update() {
+                if (!this.settled) {
+                    this.y += this.speed;
+
+                    if (this.y >= canvas.height - pixelSize) {
+                        this.settled = true;
+                        this.y = canvas.height - pixelSize;
+                    } else {
+                        const belowY = Math.floor((this.y + pixelSize) / pixelSize) * pixelSize;
+                        const currentX = Math.floor(this.x / pixelSize) * pixelSize;
+
+                        for (let particle of particles) {
+                            if (particle.settled && particle !== this) {
+                                const particleX = Math.floor(particle.x / pixelSize) * pixelSize;
+                                const particleY = Math.floor(particle.y / pixelSize) * pixelSize;
+
+                                if (particleX === currentX && particleY === belowY) {
+                                    this.settled = true;
+                                    this.y = particleY - pixelSize;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = 'black';
+                ctx.fillRect(
+                    Math.floor(this.x / pixelSize) * pixelSize,
+                    Math.floor(this.y / pixelSize) * pixelSize,
+                    pixelSize,
+                    pixelSize
+                );
+            }
+        }
+
+        for (let i = 0; i < maxParticles; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let particle of particles) {
+                particle.update();
+                particle.draw();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
