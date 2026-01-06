@@ -58,18 +58,39 @@
         }
 
         .faq-item {
-            line-height: 30px; /* Совпадение с сеткой */
+            line-height: 30px;
             margin-bottom: 0; 
+            display: flex;
+            align-items: flex-start;
         }
 
-        .faq-item a {
+        .faq-item a, .faq-item summary {
             text-decoration: underline;
             color: #1a237e;
             display: inline-block;
+            cursor: pointer;
+            outline: none;
         }
 
-        .faq-item a:hover {
+        .faq-item a:hover, .faq-item summary:hover {
             color: #d32f2f;
+        }
+
+        /* Убираем стандартный маркер details */
+        summary {
+            list-style: none;
+        }
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .sub-faq-list {
+            list-style: none;
+            padding-left: 30px;
+        }
+
+        .sub-faq-item {
+            line-height: 30px;
         }
 
         .footer-nav {
@@ -90,6 +111,12 @@
 
         .footer-nav a:hover { text-decoration: underline; }
 
+        /* Дополнительный отступ для маркера, чтобы он не слипался с текстом */
+        .faq-bullet {
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
         @media (max-width: 600px) {
             .notebook-container {
                 padding: 30px 20px 40px 60px;
@@ -104,7 +131,7 @@
                 line-height: 20px; 
             }
             h1 { font-size: 1.8rem; line-height: 40px; }
-            .faq-item { line-height: 20px; }
+            .faq-item, .sub-faq-item { line-height: 20px; }
             .footer-nav { flex-direction: column; gap: 0; padding-top: 40px; }
         }
     </style>
@@ -116,10 +143,30 @@
             <h1>Список вопросов (FAQ)</h1>
             
             <ul class="faq-list">
-                <li class="faq-item">• <a href="q1.html">Инструкция по установке Happ</a></li>
-                <li class="faq-item">• <a href="q2.html">Разное о работе VPN</a></li>
-                <li class="faq-item">• <a href="q3.html">Частые вопросы</a></li>
-                <li class="faq-item">• <a href="q4.html">Техническая поддержка</a></li>
+                <li class="faq-item">
+                    <span class="faq-bullet">•</span> 
+                    <a href="q1.html">Инструкция по установке Happ</a>
+                </li>
+                <li class="faq-item">
+                    <span class="faq-bullet">•</span> 
+                    <a href="q2.html">Разное о работе VPN</a>
+                </li>
+                
+                <li class="faq-item">
+                    <span class="faq-bullet">•</span> 
+                    <details>
+                        <summary>Частые вопросы</summary>
+                        <ul class="sub-faq-list">
+                            <li class="sub-faq-item">— <a href="qWO1.html">Технические вопросы</a></li>
+                            <li class="sub-faq-item">— <a href="qWO2.html">Финансовые вопросы</a></li>
+                        </ul>
+                    </details>
+                </li>
+
+                <li class="faq-item">
+                    <span class="faq-bullet">•</span> 
+                    <a href="q4.html">Техническая поддержка</a>
+                </li>
             </ul>
         </article>
 
