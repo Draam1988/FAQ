@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPN vs Прокси: В чем разница?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; background-color: #ffffff; }
+
+        .notebook-container {
+            min-height: 100vh;
+            width: 100%;
+            background-image: 
+                linear-gradient(#e1e1e1 1px, transparent 1px),
+                linear-gradient(90deg, #e1e1e1 1px, transparent 1px),
+                linear-gradient(90deg, transparent 79px, #ffb2b2 79px, #ffb2b2 80px, transparent 80px);
+            background-size: 30px 30px, 30px 30px, 100% 100%;
+            background-attachment: local;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 40px 60px 100px;
+            font-family: 'Neucha', cursive;
+            color: #1a237e;
+        }
+
+        .notebook-container::after {
+            content: "";
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+            opacity: 0.3; pointer-events: none; z-index: 1;
+        }
+
+        .content-area {
+            position: relative;
+            z-index: 2;
+            font-size: 1.4rem;
+            line-height: 30px; 
+            max-width: 900px;
+            letter-spacing: 0.5px;
+        }
+
+        h1 { 
+            margin-bottom: 30px; 
+            font-size: 2.4rem; 
+            text-decoration: underline;
+            line-height: 60px;
+            font-weight: normal;
+        }
+
+        .intro-text {
+            margin-bottom: 30px;
+        }
+
+        .section-block {
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #e1e1e1;
+        }
+
+        details {
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border-radius: 4px;
+        }
+
+        details:hover {
+            background: rgba(26, 35, 126, 0.03);
+        }
+
+        summary {
+            list-style: none;
+            outline: none;
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::before {
+            content: "→";
+            display: inline-block;
+            margin-right: 15px;
+            color: #b71c1c;
+            transition: transform 0.3s ease;
+            font-weight: bold;
+        }
+
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .section-title {
+            color: #1a237e;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 1.6rem;
+            line-height: 30px;
+        }
+
+        .details-content {
+            padding: 0 0 20px 30px;
+            color: #333;
+        }
+
+        p { margin-bottom: 30px; }
+        p:last-child { margin-bottom: 0; }
+
+        ul {
+            margin-bottom: 30px;
+            padding-left: 20px;
+        }
+
+        li {
+            list-style-type: "— ";
+            margin-bottom: 10px;
+        }
+
+        .footer-nav {
+            position: relative;
+            z-index: 2;
+            margin-top: auto;
+            padding-top: 60px;
+            display: flex;
+            gap: 40px;
+            line-height: 30px;
+        }
+
+        .footer-nav a {
+            text-decoration: none;
+            color: #1a237e;
+            font-size: 1.3rem;
+        }
+
+        .footer-nav a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .notebook-container {
+                padding: 30px 20px 40px 60px;
+                background-image: 
+                    linear-gradient(#e1e1e1 1px, transparent 1px),
+                    linear-gradient(90deg, #e1e1e1 1px, transparent 1px),
+                    linear-gradient(90deg, transparent 39px, #ffb2b2 39px, #ffb2b2 40px, transparent 40px);
+                background-size: 20px 20px, 20px 20px, 100% 100%;
+            }
+            .content-area { font-size: 1.2rem; line-height: 20px; }
+            h1 { font-size: 1.8rem; line-height: 40px; }
+            .section-title { font-size: 1.4rem; line-height: 20px; }
+            .details-content { padding-left: 20px; }
+            .footer-nav { flex-direction: column; gap: 0; padding-top: 40px; }
+            p { margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="notebook-container">
+        <article class="content-area">
+            <h1>VPN vs Прокси</h1>
+
+            <div class="intro-text">
+                <p>Частая проблема пользователей — непонимание, чем отличается прокси от VPN. С одной стороны, кажется, что это «одно и то же»: и то, и другое «перекидывает» ваш трафик через удалённый сервер. С другой — поведение и задачи у них разные.</p>
+            </div>
+
+            <section class="section-block">
+                <details>
+                    <summary>
+                        <span class="section-title">В чём они похожи</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>Если сильно упростить маршрутизацию и терминологию, и VPN, и прокси делают одно:</p>
+                        <ul>
+                            <li>ваше устройство сначала подключается к удалённой машине в другой локации;</li>
+                            <li>уже оттуда идёт обращение к нужному сайту или сервису (тот же YouTube и т.п.).</li>
+                        </ul>
+                        <p>Так можно обходить гео‑ограничения и часть блокировок. На этом сходство для практики обычно и заканчивается.</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="section-block">
+                <details>
+                    <summary>
+                        <span class="section-title">Чем принципиально отличается VPN?</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>VPN работает на уровне всей системы и создаёт зашифрованный туннель (замаскированный канал) между вашим устройством и VPN‑сервером. Обычно:</p>
+                        <ul>
+                            <li>шифруется весь трафик устройства (или хотя бы всего подключения, а не одного приложения);</li>
+                            <li>провайдер и локальная сеть видят только зашифрованный поток к серверу VPN, а не конкретные сайты;</li>
+                            <li>протоколы VPN могут включать не только шифрование, но и обфускацию (маскировку) трафика, что помогает обходить DPI и сложные блокировки.</li>
+                        </ul>
+                        <p>Поэтому VPN чаще используют, когда нужно одновременно обойти цензуру, скрыть содержание трафика от провайдера и защититься в публичных сетях.</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="section-block">
+                <details>
+                    <summary>
+                        <span class="section-title">Прокси — штука иная</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>Обычно они работают на уровне приложений. Т.е. их можно поставить в браузер или, например, в Телеграм клиент. Главные отличия прокси:</p>
+                        <ul>
+                            <li>прокси сам по себе не гарантирует шифрование: если вы ходите через него на HTTPS‑сайты, трафик между вами и сайтом шифрует именно HTTPS;</li>
+                            <li>его проще детектировать и блокировать по IP/порту, так как протокол не пытается маскироваться под обычный трафик;</li>
+                            <li>его часто используют в паре с VPN: VPN решает вопрос шифрования и цензуры, прокси — вопрос маскировки под нужный тип IP.</li>
+                        </ul>
+                        <p>Стоимость мобильных и резидентских прокси часто выше классического VPN, особенно если это уникальные адреса.</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="section-block">
+                <details>
+                    <summary>
+                        <span class="section-title">Зачем тогда вообще нужны прокси?</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>VPN обычно подключает вас к IP‑адресам дата‑центров. Многие крупные площадки знают эти диапазоны и могут относиться к ним подозрительно. Мобильные и резидентские прокси работают иначе:</p>
+                        <ul>
+                            <li>снаружи их IP выглядят как обычные адреса мобильных операторов или домашних провайдеров;</li>
+                            <li>на «другом конце» действительно могут быть фермы реальных модемов или смартфонов;</li>
+                            <li>вы можете выбирать страну, иногда регион или даже оператора. Выбор стран в прокси как правило шире.</li>
+                        </ul>
+                        <p>Результат: для сайтов вы выглядите как живой пользователь, что повышает шанс пройти антифрод-фильтры. Но в плане обхода сложной цензуры и DPI такие прокси обычно слабее настроенного VPN.</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="section-block" style="border-bottom: none;">
+                <details open>
+                    <summary>
+                        <span class="section-title">Итог: что выбрать?</span>
+                    </summary>
+                    <div class="details-content">
+                        <ul>
+                            <li><strong>VPN</strong> нужен, когда приоритет — обход цензуры, шифрование всего трафика и защита соединения.</li>
+                            <li><strong>Прокси</strong> нужен, когда приоритет — максимально натуральный вид подключения для конкретных сервисов (маркетплейсы, соцсети) или нужна особая страна, которой нет в VPN.</li>
+                        </ul>
+                    </div>
+                </details>
+            </section>
+        </article>
+
+        <nav class="footer-nav">
+            <a href="q2.html">← К списку вопросов</a>
+            <a href="index.html">⌂ На главную</a>
+        </nav>
+    </div>
+
+</body>
+</html>
