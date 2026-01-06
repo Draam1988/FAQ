@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ответ на вопрос</title>
+    <title>Инструкция по установке Happ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <!-- Заменяем шрифт на Neucha — он более строгий и аккуратный -->
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { width: 100%; height: 100%; background-color: #ffffff; }
@@ -24,7 +25,7 @@
             display: flex;
             flex-direction: column;
             padding: 40px 40px 60px 100px;
-            font-family: 'Bad Script', cursive;
+            font-family: 'Neucha', cursive; /* Обновленный шрифт */
             color: #1a237e;
         }
 
@@ -35,32 +36,82 @@
             opacity: 0.3; pointer-events: none; z-index: 1;
         }
 
-        /* Область для твоего текста */
         .content-area {
             position: relative;
             z-index: 2;
-            font-size: 1.4rem;
-            line-height: 1.6; /* Чтобы текст ложился ближе к клеткам */
-            max-width: 800px;
+            font-size: 1.4rem; /* Чуть увеличим для Neucha, так как он компактнее */
+            line-height: 30px; 
+            max-width: 900px;
+            letter-spacing: 0.5px; /* Добавим немного "строгости" через межсимвольный интервал */
         }
 
-        h1 { margin-bottom: 20px; font-size: 2rem; text-decoration: underline; }
+        h1 { 
+            margin-bottom: 30px; 
+            font-size: 2.4rem; 
+            text-decoration: underline;
+            line-height: 60px;
+            font-weight: normal;
+        }
 
-        /* Навигация */
+        .step-title {
+            color: #1a237e;
+            font-weight: bold;
+            display: block;
+            margin-top: 30px;
+            font-size: 1.5rem;
+        }
+
+        p { margin-bottom: 0; }
+
+        .step-block {
+            margin-bottom: 30px;
+        }
+
+        .important-note {
+            color: #b71c1c; 
+            border: 2px dashed #b71c1c; 
+            padding: 14px; 
+            margin: 30px 0;
+            background: rgba(183, 28, 28, 0.03);
+            border-radius: 5px;
+            line-height: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .important-note img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            align-self: center;
+            display: block;
+            opacity: 0.9;
+        }
+
+        a {
+            color: #0d47a1;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #d32f2f;
+        }
+
         .footer-nav {
             position: relative;
             z-index: 2;
-            margin-top: auto; /* Прижимает навигацию к низу, если текста мало */
-            padding-top: 40px;
+            margin-top: auto;
+            padding-top: 60px;
             display: flex;
-            gap: 30px; /* Расстояние между кнопками */
+            gap: 40px;
+            line-height: 30px;
         }
 
         .footer-nav a {
             text-decoration: none;
             color: #1a237e;
-            font-size: 1.2rem;
-            filter: blur(0.2px);
+            font-size: 1.3rem;
         }
 
         .footer-nav a:hover { text-decoration: underline; }
@@ -74,93 +125,93 @@
                     linear-gradient(90deg, transparent 39px, #ffb2b2 39px, #ffb2b2 40px, transparent 40px);
                 background-size: 20px 20px, 20px 20px, 100% 100%;
             }
-            .content-area { font-size: 1.1rem; }
+            .content-area { 
+                font-size: 1.2rem; 
+                line-height: 20px; 
+            }
+            h1 { font-size: 1.8rem; line-height: 40px; }
+            .step-title { margin-top: 20px; font-size: 1.3rem; }
+            .important-note { line-height: 20px; margin: 20px 0; }
+            .footer-nav { flex-direction: column; gap: 0; padding-top: 40px; }
         }
     </style>
 </head>
 <body>
 
     <div class="notebook-container">
-        
         <article class="content-area">
-            <h1>Инструкция по установке</h1>
-            
+            <h1>Инструкция по установке Happ</h1>
+
+            <p>Сейчас мы рекомендуем всем нашим клиентам использовать приложение <b>Happ</b>.</p>
+
             <p>
-                <article class="content-area">
-    <h1>Инструкция по установке Happ</h1>
-
-    <p>Сейчас мы рекомендуем всем нашим клиентам использовать приложение <b>Happ</b>.</p>
-
-    <p>
-        <b>Happ</b> — это кроссплатформенное приложение для удобной работы с прокси-серверами на базе мощного ядра <i>Xray</i>. 
-        Оно доступно на Windows, macOS, Linux и мобильных устройствах (iOS/Android).
-    </p>
-
-    <p>
-        Интуитивный интерфейс и гибкие настройки делают Happ надёжным инструментом. Вам не нужно думать, как настраивать VPN на разных устройствах — схожий и дружелюбный интерфейс делает установку очень простой.
-    </p>
-
-    <div class="step-block">
-        <h3> Скачайте и установите Happ </h3>
-        
-        <p><b>Apple (iPhone, iPad, MacBook):</b><br>
-            • <a href="https://apps.apple.com/ru/app/happ-proxy-utility-plus/id6746188973" target="_blank">Для RU App Store</a><br>
-            • <a href="https://apps.apple.com/us/app/happ-proxy-utility/id6504287215" target="_blank">Глобальная версия</a>
-        </p>
-
-        <p><b>Android:</b><br>
-            • <a href="https://play.google.com/store/apps/details?id=com.happproxy" target="_blank">Google Play Store</a>
-        </p>
-
-        <p><b>Десктоп версии:</b><br>
-            • <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe">Windows (.exe)</a><br>
-            • <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.linux.x64.deb">Linux (.deb)</a>
-        </p>
-
-        <p><i>Если нет учетной записи Google/Apple, скачайте файлы напрямую:</i><br>
-            • <a href="https://github.com/Happ-proxy/happ-android/releases/latest/download/Happ.apk">APK для Android</a><br>
-            • <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg">DMG для macOS</a>
-        </p>
-    </div>
-
-    <div class="step-block">
-        <h3> Скопируйте ключ подписки </h3>
-        <p>Скопируйте текст/ссылку, которую выдал вам бот при покупке.</p>
-        <p style="color: #d32f2f; border: 1px dashed #d32f2f; padding: 10px; margin: 10px 0;">
-            <b>ВАЖНО!</b> Копируйте ключ целиком! Если в ключе есть "флаг/смайлик и русский текст" — они обязательны для корректной работы.
-        </p>
-    </div>
-
-    <div class="step-block">
-        <h3> Ввод ключа в приложение </h3>
-        <p>
-            В верхнем правом углу Happ нажмите на кнопку <b>+ (плюс)</b> и выберите пункт: <b>"Вставить из буфера обмена"</b>. 
-            После этого нажмите на большую круглую кнопку для запуска.
-        </p>
-    </div>
-
-    <div class="step-block">
-        <h3> Несколько ключей </h3>
-        <p>
-            Вы можете добавить несколько ключей. Чтобы переключиться, просто нажмите на нужный ключ — он выделится цветом.
-        </p>
-    </div>
-
-    <div class="step-block">
-        <h3> Проверка соединения </h3>
-        <p>
-            Нажмите на значок спидометра или надпись "проверить текущее соединение", чтобы убедиться, что всё работает.
-        </p>
-    </div>
-</article>
+                <b>Happ</b> — это кроссплатформенное приложение для удобной работы с прокси-серверами на базе мощного ядра <i>Xray</i>. 
+                Оно доступно на Windows, macOS, Linux и мобильных устройствах (iOS/Android).
             </p>
+
+            <p>
+                Интуитивный интерфейс и гибкие настройки делают Happ надёжным инструментом. Вам не нужно думать, как настраивать VPN на разных устройствах — схожий и дружелюбный интерфейс делает установку очень простой.
+            </p>
+
+            <section class="step-block">
+                <span class="step-title">1. Скачайте и установите Happ</span>
+                
+                <p><b>Apple (iPhone, iPad, MacBook):</b><br>
+                    • <a href="https://apps.apple.com/ru/app/happ-proxy-utility-plus/id6746188973" target="_blank">Для RU App Store</a><br>
+                    • <a href="https://apps.apple.com/us/app/happ-proxy-utility/id6504287215" target="_blank">Глобальная версия</a>
+                </p>
+
+                <p><b>Android:</b><br>
+                    • <a href="https://play.google.com/store/apps/details?id=com.happproxy" target="_blank">Google Play Store</a>
+                </p>
+
+                <p><b>Десктоп версии:</b><br>
+                    • <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe">Windows (.exe)</a><br>
+                    • <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.linux.x64.deb">Linux (.deb)</a>
+                </p>
+
+                <p><i>Если нет учетной записи Google/Apple, скачайте напрямую:</i><br>
+                    • <a href="https://github.com/Happ-proxy/happ-android/releases/latest/download/Happ.apk">APK для Android</a><br>
+                    • <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg">DMG для macOS</a>
+                </p>
+            </section>
+
+            <section class="step-block">
+                <span class="step-title">2. Скопируйте ключ подписки</span>
+                <p>Скопируйте текст или ссылку, которую выдал вам бот при покупке.</p>
+                <div class="important-note">
+                    <span><b>ВАЖНО!</b> Копируйте ключ целиком! Если в ключе есть "флаг/смайлик и русский текст" — они обязательны для корректной работы.</span>
+                    <img src="key.png" alt="[Изображение ключа]">
+                </div>
+            </section>
+
+            <section class="step-block">
+                <span class="step-title">3. Ввод ключа в приложение</span>
+                <p>
+                    В верхнем правом углу Happ нажмите на кнопку <b>+ (плюс)</b> и выберите пункт: <b>"Вставить из буфера обмена"</b>. 
+                    После этого нажмите на большую круглую кнопку для запуска.
+                </p>
+            </section>
+
+            <section class="step-block">
+                <span class="step-title">4. Несколько ключей</span>
+                <p>
+                    Вы можете добавить несколько ключей. Чтобы переключиться, просто нажмите на нужный ключ — он выделится цветом.
+                </p>
+            </section>
+
+            <section class="step-block">
+                <span class="step-title">5. Проверка соединения</span>
+                <p>
+                    Нажмите на значок спидометра или надпись "проверить текущее соединение", чтобы убедиться, что всё работает.
+                </p>
+            </section>
         </article>
 
         <nav class="footer-nav">
             <a href="faq1.html">← Назад к вопросам</a>
             <a href="index.html">⌂ На главную</a>
         </nav>
-        
     </div>
 
 </body>
