@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube и реклама под VPN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; background-color: #ffffff; }
+
+        .notebook-container {
+            min-height: 100vh;
+            width: 100%;
+            background-image: 
+                linear-gradient(#e1e1e1 1px, transparent 1px),
+                linear-gradient(90deg, #e1e1e1 1px, transparent 1px),
+                linear-gradient(90deg, transparent 79px, #ffb2b2 79px, #ffb2b2 80px, transparent 80px);
+            background-size: 30px 30px, 30px 30px, 100% 100%;
+            background-attachment: local;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 40px 60px 100px;
+            font-family: 'Neucha', cursive;
+            color: #1a237e;
+        }
+
+        .notebook-container::after {
+            content: "";
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+            opacity: 0.3; pointer-events: none; z-index: 1;
+        }
+
+        .content-area {
+            position: relative;
+            z-index: 2;
+            font-size: 1.4rem;
+            line-height: 30px; 
+            max-width: 900px;
+            letter-spacing: 0.5px;
+        }
+
+        h1 { 
+            margin-bottom: 30px; 
+            font-size: 2.4rem; 
+            text-decoration: underline;
+            line-height: 60px;
+            font-weight: normal;
+        }
+
+        .intro-text {
+            margin-bottom: 30px;
+        }
+
+        .section-block {
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #e1e1e1;
+        }
+
+        details {
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border-radius: 4px;
+        }
+
+        details:hover {
+            background: rgba(26, 35, 126, 0.03);
+        }
+
+        summary {
+            list-style: none;
+            outline: none;
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::before {
+            content: "→";
+            display: inline-block;
+            margin-right: 15px;
+            color: #b71c1c;
+            transition: transform 0.3s ease;
+            font-weight: bold;
+        }
+
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .section-title {
+            color: #1a237e;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 1.6rem;
+            line-height: 30px;
+        }
+
+        .details-content {
+            padding: 0 0 20px 30px;
+            color: #333;
+        }
+
+        p { margin-bottom: 30px; }
+        p:last-child { margin-bottom: 0; }
+
+        ul {
+            margin-bottom: 30px;
+            padding-left: 20px;
+        }
+
+        li {
+            list-style-type: "— ";
+            margin-bottom: 10px;
+        }
+
+        .footer-nav {
+            position: relative;
+            z-index: 2;
+            margin-top: auto;
+            padding-top: 60px;
+            display: flex;
+            gap: 40px;
+            line-height: 30px;
+        }
+
+        .footer-nav a {
+            text-decoration: none;
+            color: #1a237e;
+            font-size: 1.3rem;
+        }
+
+        .footer-nav a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .notebook-container {
+                padding: 30px 20px 40px 60px;
+                background-image: 
+                    linear-gradient(#e1e1e1 1px, transparent 1px),
+                    linear-gradient(90deg, #e1e1e1 1px, transparent 1px),
+                    linear-gradient(90deg, transparent 39px, #ffb2b2 39px, #ffb2b2 40px, transparent 40px);
+                background-size: 20px 20px, 20px 20px, 100% 100%;
+            }
+            .content-area { font-size: 1.2rem; line-height: 20px; }
+            h1 { font-size: 1.8rem; line-height: 40px; }
+            .section-title { font-size: 1.4rem; line-height: 20px; }
+            .details-content { padding-left: 20px; }
+            .footer-nav { flex-direction: column; gap: 0; padding-top: 40px; }
+            p { margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="notebook-container">
+        <article class="content-area">
+            <h1>YouTube и реклама</h1>
+
+            <div class="intro-text">
+                <p>За годы санкций многие успели отвыкнуть от рекламы на YouTube. Кто-то даже забыл, что она вообще бывает. А потом вы включаете VPN — и внезапно реклама возвращается. Логичный вопрос: «За что я плачу деньги??».</p>
+                <p>Другие, наоборот, хотят видеть рекламу (например, чтобы поддержать блогеров или видеть локальные офферы) — а её нет. Почему так? Давайте разберемся без сокращений.</p>
+            </div>
+
+            <section class="section-block">
+                <details>
+                    <summary>
+                        <span class="section-title">Почему реклама пропала из России?</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>После начала санкций YouTube отключил показ рекламы для зрителей из России и фактически остановил монетизацию просмотров из РФ для авторов. До этого монетизация шла в основном за счёт рекламных вставок: те самые ролики перед и во время видео, которые нельзя просто пролистать.</p>
+                        <p>В какой‑то момент получилось «идеально» для обычного зрителя: видео идут, блогеры не получают деньги, но и рекламы нет, и не нужно ставить блокировщики. Роскомнадзор тоже был доволен.</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="section-block">
+                <details>
+                    <summary>
+                        <span class="section-title">Что изменилось с появлением VPN?</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>Когда для части жителей России VPN стал единственным способом нормально смотреть YouTube, в статистике сервиса внезапно выросло количество «пользователей» из Нидерландов, Германии, Польши и других стран. Понятно, что большая часть этого роста — это не реальные переезды, а VPN‑подключения.</p>
+                        <p>Для YouTube здесь есть конфликт интересов:</p>
+                        <ul>
+                            <li>С одной стороны, реклама — основной источник дохода и для платформы, и для авторов.</li>
+                            <li>С другой — рекламодателю важно, чтобы показы шли по нужной аудитории, которая может реально купить товар или услугу. Если немецкий рекламодатель платит за показы по Германии, а часть показов уходит людям, которые физически находятся в России и не могут стать клиентами, эффективность кампаний падает.</li>
+                        </ul>
+                        <p>Отсюда и осторожное отношение к трафику, который выглядит «подозрительно VPN‑образным».</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="section-block">
+                <details>
+                    <summary>
+                        <span class="section-title">Почему иногда есть реклама, а иногда нет?</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>Важно понимать: алгоритмы YouTube и Google — это чёрный ящик. Никто снаружи не знает точных правил. Но по факту поведение выглядит так:</p>
+                        <ul>
+                            <li>В одних случаях YouTube относится к вашему подключению как к «нормальному» пользователю из страны VPN-сервера — и показывает рекламу, как местному жителю.</li>
+                            <li>В других случаях система, судя по всему, относит подключение к «сомнительным» (или к регионам без монетизации) — и реклама либо не показывается, либо показы считаются некоммерческими.</li>
+                        </ul>
+                        <p>На это влияет комбинация факторов: тип и диапазон IP, частота его использования, история аккаунта, настройки страны, платёжные данные, куки и многое другое. VPN здесь — только один из сигналов, не единственный и не гарантированный.</p>
+                        <p>Отсюда и парадокс:</p>
+                        <ul>
+                            <li>Чем сильнее VPN «похож» на обычное подключение реального пользователя (уникальные IP, нормальные гео-диапазоны, аккуратная маскировка), тем выше шанс, что YouTube покажет рекламу.</li>
+                            <li>Чем более «палевные» IP (массовые дата-центры, известные диапазоны), тем выше риск, что реклама не будет крутиться нормально.</li>
+                        </ul>
+                    </div>
+                </details>
+            </section>
+
+            <section class="section-block" style="border-bottom: none;">
+                <details open>
+                    <summary>
+                        <span class="section-title">Почему VPN почти не может это контролировать?</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>VPN-провайдер управляет страной и типом IP, маскировкой от регуляторов (РКН) и стабильностью. Но он не управляет внутренними алгоритмами YouTube или тем, какой инвентарь вам назначит платформа.</p>
+                        <p>Чтобы надёжно обходить блокировки, приходится делать VPN как можно менее заметным для DPI. Побочный эффект: такой трафик выглядит как обычный пользователь из выбранной страны, а это значит — реклама, таргетирование и вся «нормальная жизнь» интернета.</p>
+                        <p>Поэтому если вам очень важно, чтобы рекламы **никогда** не было, или наоборот — чтобы она **обязательно** была, реалистично обещать это нельзя. Окончательное решение всегда за YouTube.</p>
+                    </div>
+                </details>
+            </section>
+        </article>
+
+        <nav class="footer-nav">
+            <a href="q2.html">← К списку вопросов</a>
+            <a href="index.html">⌂ На главную</a>
+        </nav>
+    </div>
+
+</body>
+</html>
