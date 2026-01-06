@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Разбираемся в протоколах VPN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; background-color: #ffffff; }
+
+        .notebook-container {
+            min-height: 100vh;
+            width: 100%;
+            background-image: 
+                linear-gradient(#e1e1e1 1px, transparent 1px),
+                linear-gradient(90deg, #e1e1e1 1px, transparent 1px),
+                linear-gradient(90deg, transparent 79px, #ffb2b2 79px, #ffb2b2 80px, transparent 80px);
+            background-size: 30px 30px, 30px 30px, 100% 100%;
+            background-attachment: local;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 40px 60px 100px;
+            font-family: 'Neucha', cursive;
+            color: #1a237e;
+        }
+
+        .notebook-container::after {
+            content: "";
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+            opacity: 0.3; pointer-events: none; z-index: 1;
+        }
+
+        .content-area {
+            position: relative;
+            z-index: 2;
+            font-size: 1.4rem;
+            line-height: 30px; 
+            max-width: 900px;
+            letter-spacing: 0.5px;
+        }
+
+        h1 { 
+            margin-bottom: 30px; 
+            font-size: 2.4rem; 
+            text-decoration: underline;
+            line-height: 60px;
+            font-weight: normal;
+        }
+
+        .intro-text {
+            margin-bottom: 30px;
+        }
+
+        .protocol-block {
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #e1e1e1;
+        }
+
+        /* Обновленные стили для раскрывающегося списка */
+        details {
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border-radius: 4px;
+        }
+
+        details:hover {
+            background: rgba(26, 35, 126, 0.03);
+        }
+
+        summary {
+            list-style: none;
+            outline: none;
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Стилизованная стрелочка */
+        summary::before {
+            content: "→";
+            display: inline-block;
+            margin-right: 15px;
+            color: #b71c1c;
+            transition: transform 0.3s ease;
+            font-weight: bold;
+        }
+
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .protocol-name {
+            color: #1a237e;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 1.6rem;
+            line-height: 30px;
+        }
+
+        .details-content {
+            padding: 0 0 20px 30px;
+            color: #333;
+        }
+
+        p { margin-bottom: 30px; }
+        p:last-child { margin-bottom: 0; }
+
+        .footer-nav {
+            position: relative;
+            z-index: 2;
+            margin-top: auto;
+            padding-top: 60px;
+            display: flex;
+            gap: 40px;
+            line-height: 30px;
+        }
+
+        .footer-nav a {
+            text-decoration: none;
+            color: #1a237e;
+            font-size: 1.3rem;
+        }
+
+        .footer-nav a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .notebook-container {
+                padding: 30px 20px 40px 60px;
+                background-image: 
+                    linear-gradient(#e1e1e1 1px, transparent 1px),
+                    linear-gradient(90deg, #e1e1e1 1px, transparent 1px),
+                    linear-gradient(90deg, transparent 39px, #ffb2b2 39px, #ffb2b2 40px, transparent 40px);
+                background-size: 20px 20px, 20px 20px, 100% 100%;
+            }
+            .content-area { font-size: 1.2rem; line-height: 20px; }
+            h1 { font-size: 1.8rem; line-height: 40px; }
+            .protocol-name { font-size: 1.4rem; line-height: 20px; }
+            .details-content { padding-left: 20px; }
+            .footer-nav { flex-direction: column; gap: 0; padding-top: 40px; }
+            p { margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="notebook-container">
+        <article class="content-area">
+            <h1>Что такое Протоколы?</h1>
+
+            <div class="intro-text">
+                <p>Скорее всего вы слышали про такое слово как "Протокол" в разрезе работы ВПН. Что это такое? Какие бывают и в чем разница?</p>
+                <p>Если вы более менее продвинутый пользователь VPN, то скорее всего знаете это. Для многих же нет разницы - им хочется что бы работал ютуб, инстаграм и теперь вот вотсап. Какой там протокол, как он работает - не важно. Но не все так однозначно. Полезно будет знать всем. В такое время живем.</p>
+                <p>ВПН протоколов много. Но стоит рассказать об основных с которым встречается рядовой пользователь. Кратко и с минимальным количеством терминов.</p>
+                <p>Протокол ВПН это набор правил, по которым устройство подключается к удаленному серверу. Все ВПН подключают вас к серверу, но делают это по-разному, используя различные методы шифрования и маскировки трафика.</p>
+            </div>
+
+            <section class="protocol-block">
+                <details>
+                    <summary>
+                        <span class="protocol-name">OpenVPN</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>Это протокол с открытым исходным кодом, созданный в 2001 году американским программистом Джеймсом Йонаном. Его главная сила — в универсальности и надежности: он работает на всех операционных системах (Windows, macOS, Linux, Android, iOS) и применяет стандарт шифрования AES-256 для защиты данных. OpenVPN стал стандартом для корпоративных сетей благодаря гибкости настройки. Его часто используют для роутеров, так как почти все умеют с ним работать. Но у него есть существенный минус: протокол легко вычисляется современными системами глубокого анализа пакетов (DPI), что делает его уязвимым к блокировкам. В России с 2024 года OpenVPN подвержен массовым блокировкам, хотя у отдельных провайдеров он работает и сейчас. Но в какой момент это изменится - никто не может сказать. По этому этот протокол мы и выдаем "как есть" - т.е. если он не заработает, мы ничего не можем сделать.</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="protocol-block">
+                <details>
+                    <summary>
+                        <span class="protocol-name">Outline</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>Это ориентированный на простых пользователей VPN-инструмент от Jigsaw (подразделение Google), официально запущенный в 2018 году. Он построен поверх протокола Shadowsocks как удобная обёртка. Имеет очень простой клиент на большинство платформ (Windows, macOS, Linux, Android, iOS), нет сложных настроек. Минусы — технически это не новый протокол, а лишь упрощённая реализация Shadowsocks, который активно детектируется системами DPI с 2019 года через анализ паттернов первого пакета данных. Кроме того, Outline почти не даёт тонкой настройки обхода блокировок и не поддерживает более продвинутые современные транспорты (как VLESS/Reality или XHTTP), из‑за чего он не настолько надёжен в России при агрессивной цензуре. Как и OpenVPN, этот протокол мы выдаем "как есть" - т.е. если он не заработает, мы ничего не можем сделать. Хотя недавно мы его очень сильно "прокачали", но это всё ещё план Б. Хотя местами он работает отлично, и там где работает - это очень быстрый и лёгкий VPN.</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="protocol-block">
+                <details>
+                    <summary>
+                        <span class="protocol-name">Shadowsocks</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>Прокси-протокол, кто-то вообще не считает его полноценным VPN. Он был создан в Китае в 2012 году китайским разработчиком под псевдонимом "clowwindy" как ответ на блокировки классических VPN. Его задача не столько "делать VPN", сколько маскировать трафик под обычное шифрованное соединение и обходить цензуру. По сути, это SOCKS5-прокси с лёгким шифрованием и обфускацией. Плюс Shadowsocks в том, что он очень быстрый и гибко настраивается, хорошо работает на слабых серверах. Кроме того, его можно использовать в браузерах через расширения. Минус большой: начиная с 2019 года его научились надёжно детектировать с помощью DPI через анализ энтропии и длины пакетов, поэтому в России он всё чаще блокируется и требует дополнительных обфускаций или перехода на более современные протоколы. Мы не используем его.</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="protocol-block">
+                <details>
+                    <summary>
+                        <span class="protocol-name">WireGuard</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>Это современный VPN-протокол, разработка которого началась в 2016 году, а стабильная версия была интегрирована в ядро Linux в марте 2020. Его главная сила - в скорости и эффективности: он значительно быстрее OpenVPN и экономнее к ресурсам процессора. WireGuard не требует установления соединения (как OpenVPN), мгновенно переподключается при смене сети и потребляет минимум батареи на мобильных устройствах. Однако у него есть критический минус для стран с цензурой: протокол легко определяется системами глубокого анализа пакетов (DPI), так как не имеет встроенной обфускации — его трафик имеет уникальные сигнатуры, которые сложно замаскировать под обычный трафик. В итоге WireGuard хорош для обхода слабых блокировок и больше подходит для обхода региональных ограничений, а не жёсткой цензуры. Например, для Google, который ограничил Gemini для РФ - лучше WireGuard с точки зрения скорости на слабом интернете. Мы не используем этот протокол, так как основная цель всё же обойти цензуру.</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="protocol-block">
+                <details open>
+                    <summary>
+                        <span class="protocol-name">VLESS (Наш основной)</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>Это современный протокол, разработанный как часть экосистемы Project V (V2Ray). Главная идея в том, что он умеет использовать различные современные технологии шифрования и маскировки трафика. В зависимости от скилла администратора, поднимающего этот протокол, он может быть очень разным как по надежности, так и сложности настройки. Подключив на сервере новые решения (например, Reality или XTLS) и внеся правки в конфигурацию, можно оперативно реагировать на обстановку с блокировками. Он умеет маскировать запросы под невинный HTTPS-трафик, использовать различные транспортные протоколы. Минусы - он требователен к ресурсам сервера и качеству сети. Он может повышать задержку (пинг) и несколько снижать скорость соединения, но главное: он один из самых надёжных в части обхода современной цензуры. Это наш основной протокол.</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="protocol-block" style="border-bottom: none;">
+                <details>
+                    <summary>
+                        <span class="protocol-name">Hysteria 2</span>
+                    </summary>
+                    <div class="details-content">
+                        <p>Не часто встречаемый, но развитый протокол, построенный на базе QUIC (протокол, используемый в HTTP/3). Он оптимизирован для работы в условиях высоких потерь пакетов и нестабильной сети. Показывает отличные скорости даже на слабых или перегруженных 3G/4G сетях благодаря продвинутому контролю перегрузок. Умеет пропускать потерянные пакеты трафика и работать дальше без значительного падения производительности. В общем, если вы поехали в деревню к бабушке, а там пара палок 3G только на чердаке, а в ютуб нужно - стоит попробовать.</p>
+                    </div>
+                </details>
+            </section>
+        </article>
+
+        <nav class="footer-nav">
+            <a href="q2.html">← К списку вопросов</a>
+            <a href="index.html">⌂ На главную</a>
+        </nav>
+    </div>
+
+</body>
+</html>
