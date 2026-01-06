@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ответ на вопрос</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; background-color: #ffffff; }
+
+        .notebook-container {
+            min-height: 100vh;
+            width: 100%;
+            background-image: 
+                linear-gradient(#e1e1e1 1px, transparent 1px),
+                linear-gradient(90deg, #e1e1e1 1px, transparent 1px),
+                linear-gradient(90deg, transparent 79px, #ffb2b2 79px, #ffb2b2 80px, transparent 80px);
+            background-size: 30px 30px, 30px 30px, 100% 100%;
+            background-attachment: local;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 40px 60px 100px;
+            font-family: 'Bad Script', cursive;
+            color: #1a237e;
+        }
+
+        .notebook-container::after {
+            content: "";
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+            opacity: 0.3; pointer-events: none; z-index: 1;
+        }
+
+        /* Область для твоего текста */
+        .content-area {
+            position: relative;
+            z-index: 2;
+            font-size: 1.4rem;
+            line-height: 1.6; /* Чтобы текст ложился ближе к клеткам */
+            max-width: 800px;
+        }
+
+        h1 { margin-bottom: 20px; font-size: 2rem; text-decoration: underline; }
+
+        /* Навигация */
+        .footer-nav {
+            position: relative;
+            z-index: 2;
+            margin-top: auto; /* Прижимает навигацию к низу, если текста мало */
+            padding-top: 40px;
+            display: flex;
+            gap: 30px; /* Расстояние между кнопками */
+        }
+
+        .footer-nav a {
+            text-decoration: none;
+            color: #1a237e;
+            font-size: 1.2rem;
+            filter: blur(0.2px);
+        }
+
+        .footer-nav a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .notebook-container {
+                padding: 30px 20px 40px 60px;
+                background-image: 
+                    linear-gradient(#e1e1e1 1px, transparent 1px),
+                    linear-gradient(90deg, #e1e1e1 1px, transparent 1px),
+                    linear-gradient(90deg, transparent 39px, #ffb2b2 39px, #ffb2b2 40px, transparent 40px);
+                background-size: 20px 20px, 20px 20px, 100% 100%;
+            }
+            .content-area { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="notebook-container">
+        
+        <article class="content-area">
+            <h1>Заголовок вопроса</h1>
+            
+            <p>
+                Твой текст ответа будет здесь...
+            </p>
+        </article>
+
+        <nav class="footer-nav">
+            <a href="faq1.html">← Назад к вопросам</a>
+            <a href="index.html">⌂ На главную</a>
+        </nav>
+        
+    </div>
+
+</body>
+</html>
