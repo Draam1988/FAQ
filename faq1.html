@@ -4,25 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ - Список вопросов</title>
-    <!-- Подключаем рукописный шрифт -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
     <style>
-        /* Обнуляем стандартные отступы браузера */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; background-color: #ffffff; }
 
-        body, html {
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-        }
-
-        /* Создаем фон страницы (тетрадь в клетку) */
         .notebook-container {
             min-height: 100vh;
             width: 100%;
@@ -30,111 +18,114 @@
                 linear-gradient(#e1e1e1 1px, transparent 1px),
                 linear-gradient(90deg, #e1e1e1 1px, transparent 1px),
                 linear-gradient(90deg, transparent 79px, #ffb2b2 79px, #ffb2b2 80px, transparent 80px);
-            
             background-size: 30px 30px, 30px 30px, 100% 100%;
             background-attachment: local;
             position: relative;
             display: flex;
             flex-direction: column;
-            padding: 40px 20px 80px 100px; /* Отступ слева для полей */
-            font-family: 'Bad Script', cursive;
+            padding: 40px 40px 60px 100px;
+            font-family: 'Neucha', cursive;
+            color: #1a237e;
         }
 
-        /* Накладываем легкую текстуру бумаги */
         .notebook-container::after {
             content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
-            opacity: 0.3;
-            pointer-events: none;
-            z-index: 1;
+            opacity: 0.3; pointer-events: none; z-index: 1;
         }
 
-        /* Список вопросов */
-        .faq-list {
+        .content-area {
             position: relative;
             z-index: 2;
+            font-size: 1.4rem;
+            line-height: 30px; 
+            max-width: 900px;
+            letter-spacing: 0.5px;
+        }
+
+        h1 { 
+            margin-bottom: 30px; 
+            font-size: 2.4rem; 
+            text-decoration: underline;
+            line-height: 60px;
+            font-weight: normal;
+        }
+
+        .faq-list {
             list-style: none;
-            flex-grow: 1;
+            margin-top: 30px;
         }
 
         .faq-item {
-            margin-bottom: 8px;
+            line-height: 30px; /* Совпадение с сеткой */
+            margin-bottom: 0; 
         }
 
         .faq-item a {
-            text-decoration: none;
+            text-decoration: underline;
             color: #1a237e;
-            font-size: 1.3rem;
-            transition: opacity 0.3s;
-            filter: blur(0.2px);
             display: inline-block;
         }
 
         .faq-item a:hover {
-            opacity: 0.7;
-            text-decoration: underline;
+            color: #d32f2f;
         }
 
-        /* ФИКСИРОВАННАЯ НАВИГАЦИЯ (без фона и наклона) */
         .footer-nav {
-            position: fixed;
-            bottom: 30px;
-            left: 100px; /* Выравниваем по линии текста за красным полем */
-            z-index: 10;
+            position: relative;
+            z-index: 2;
+            margin-top: auto;
+            padding-top: 60px;
+            display: flex;
+            gap: 40px;
+            line-height: 30px;
         }
 
         .footer-nav a {
             text-decoration: none;
             color: #1a237e;
-            font-size: 1.2rem;
-            filter: blur(0.1px);
-            display: block;
-            transition: opacity 0.3s;
+            font-size: 1.3rem;
         }
 
-        .footer-nav a:hover {
-            text-decoration: underline;
-            opacity: 0.7;
-        }
+        .footer-nav a:hover { text-decoration: underline; }
 
-        /* Адаптация под мобильные устройства */
         @media (max-width: 600px) {
             .notebook-container {
-                background-size: 20px 20px, 20px 20px, 100% 100%;
+                padding: 30px 20px 40px 60px;
                 background-image: 
                     linear-gradient(#e1e1e1 1px, transparent 1px),
                     linear-gradient(90deg, #e1e1e1 1px, transparent 1px),
                     linear-gradient(90deg, transparent 39px, #ffb2b2 39px, #ffb2b2 40px, transparent 40px);
-                padding: 30px 10px 80px 60px;
+                background-size: 20px 20px, 20px 20px, 100% 100%;
             }
-            .faq-item a { font-size: 1.1rem; }
-            .footer-nav {
-                bottom: 15px;
-                left: 60px; /* Подстраиваем под поле на мобильных */
+            .content-area { 
+                font-size: 1.2rem; 
+                line-height: 20px; 
             }
-            .footer-nav a { font-size: 1rem; }
+            h1 { font-size: 1.8rem; line-height: 40px; }
+            .faq-item { line-height: 20px; }
+            .footer-nav { flex-direction: column; gap: 0; padding-top: 40px; }
         }
     </style>
 </head>
 <body>
 
     <div class="notebook-container">
-        
-        <ul class="faq-list">
-            <li class="faq-item"><a href="q1.html">Инструкция по установке</a></li>
-            <li class="faq-item"><a href="q2.html">Разное о работе VPN</a></li>
-            <li class="faq-item"><a href="q3.html">Частые вопросы</a></li>
-            <li class="faq-item"><a href="q4.html">Техническая поддержка</a></li>
-        </ul>
+        <article class="content-area">
+            <h1>Список вопросов (FAQ)</h1>
+            
+            <ul class="faq-list">
+                <li class="faq-item">• <a href="happ_instruction.html">Инструкция по установке Happ</a></li>
+                <li class="faq-item">• <a href="q2.html">Разное о работе VPN</a></li>
+                <li class="faq-item">• <a href="q3.html">Частые вопросы</a></li>
+                <li class="faq-item">• <a href="q4.html">Техническая поддержка</a></li>
+            </ul>
+        </article>
 
-        <div class="footer-nav">
+        <nav class="footer-nav">
             <a href="index.html">← На главную</a>
-        </div>
+        </nav>
     </div>
 
 </body>
